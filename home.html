@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clipboard Paste</title>
+<style>
+  body {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  #pasteInput {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 300px;
+  }
+</style>
+</head>
+<body>
+  <input id="pasteInput" type="text" placeholder="Press Win+V to paste" readonly />
+
+<script>
+  const pasteInput = document.getElementById('pasteInput');
+
+  // Preventing input on the field manually or via Ctrl+V
+  pasteInput.addEventListener('keydown', function(event) {
+    event.preventDefault();
+  });
+
+  // Only allowing paste via the system paste event (e.g., triggered by Win+V)
+  window.addEventListener('paste', function(event) {
+    pasteInput.value = event.clipboardData.getData('text');
+    event.preventDefault(); // Do not allow the default system paste
+  });
+
+</script>
+</body>
+</html>
